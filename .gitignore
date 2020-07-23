@@ -1,3 +1,5 @@
+
+*.php
 .htaccess
 graphe.html
 graphe.pde

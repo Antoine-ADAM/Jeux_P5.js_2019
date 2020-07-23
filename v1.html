@@ -1,92 +1,183 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Jeux Antoine XD</title>
-  <link rel="shortcut icon" href="ico.ico" type="image/x-icon">
-  <script src="processing.js"></script>
-</head>
-<body style="margin: 0px">
- 	<canvas id="canvasP"> </canvas>
- 	<script type="text/processing" data-processing-target="canvasP">
-var backgroundColour = color(255,255,255);
-void setup(){
-    size(screen.width, screen.height);
-    textFont(loadFont("FFScala.ttf"));
-    generate();
-}
-var x =20;
-var y =20;
-var point=0;
-var vie=5;
-var boules=[];
-var min=1000.0;
-void draw() {
-    if(min>frameRate){
-        min=frameRate;
-    }
-    background(backgroundColour);
-    x+=(mouseX-x)*0.09;
-    y+=(mouseY-y)*0.09;
-    fill(color(0.5*frameRate,frameRate,0));
-    text("FPS:"+int(frameRate)+" min:"+min,15,30);
-    text("X:"+int(x)+" Y:"+int(y),15,40);
-    text("Point:"+point+" Vie:"+vie,15,50)
-    text("L:"+width+" H:"+height,15,60)
-    fill(color(int(cos(0.001*millis()+70)*255),int(cos(0.001*millis()+190)*255),int(cos(0.001*millis())*255)));
-    ellipse(x,y,10,10);
-    for(int i=0;i<boules.length;i++){
-        boules[i].xa+=cos(boules[i].d)*boules[i].v*0.1;
-        boules[i].ya+=sin(boules[i].d)*boules[i].v*0.1;
-        boules[i].draw();
-        boules[i].colision(i);
-    }
-};
-var generate = function(){
-    boules=[];
-    for(var i=0; i<=150;i++){
-        boules.push(new Boule(round(width/2),round(height/2),round(random(359)),round(random(1)),round(random(15,30))));
-    }
-};
-class Boule{
-    int xa, ya, d, b, v;
-    Boule(int xa,int ya,int d,int b,int v){
-        this.xa=xa;
-        this.ya=ya;
-        this.v=v;
-        this.b=b;
-        this.d=d;
-    }
-    void colision(iii){
-        pp =sqrt(this.v*10)/2;
-        if((this.xa-pp) <0 || (this.xa+pp) > width){
-            this.d=180+this.d;
-        }else if((this.ya-pp) <0 || (this.ya+pp) > height){
-            this.d=0-this.d;
-        }else if(sqrt(pow(x-this.xa,2)+pow(y-this.ya,2))<(pp+5)){
-            if(b == 0){
-                point++;
-            }else{
-                vie--;
-                if(vie == 0){
-                    fill(0,0,200);
-                    textSize(70);
-                    text("Score:"+point,width/2,height/2);
-                    exit();
-                }      
-            }
-            boules[iii]=new Boule(round(random(100,width-100)),round(random(100,height-100)),round(random(359)),round(random(1)),round(random(10,20+point*5)));
-        }
-    }
-    void draw(){
-        if(this.b == 0){
-            fill(0,200,0);
-        }else{
-            fill(200,0,0);
-        }
-        ellipse(this.xa,this.ya,sqrt(this.v*10),sqrt(this.v*10));
-    }
-}
-</script>
-</body>
+<!doctype html>
+
+<html lang="fr">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>name</title>
+
+  <link rel="shortcut icon" href="ico.ico" type="image/x-icon">
+
+  <script src="processing.js"></script>
+
+</head>
+
+<body style="margin: 0px">
+
+ 	<canvas id="canvasP"> </canvas>
+
+ 	<script type="text/processing" data-processing-target="canvasP">
+
+var backgroundColour = color(255,255,255);
+
+void setup(){
+
+    size(screen.width, screen.height);
+
+    textFont(loadFont("FFScala.ttf"));
+
+    generate();
+
+}
+
+var x =20;
+
+var y =20;
+
+var point=0;
+
+var vie=5;
+
+var boules=[];
+
+var min=1000.0;
+
+void draw() {
+
+    if(min>frameRate){
+
+        min=frameRate;
+
+    }
+
+    background(backgroundColour);
+
+    x+=(mouseX-x)*0.09;
+
+    y+=(mouseY-y)*0.09;
+
+    fill(color(0.5*frameRate,frameRate,0));
+
+    text("FPS:"+int(frameRate)+" min:"+min,15,30);
+
+    text("X:"+int(x)+" Y:"+int(y),15,40);
+
+    text("Point:"+point+" Vie:"+vie,15,50)
+
+    text("L:"+width+" H:"+height,15,60)
+
+    fill(color(int(cos(0.001*millis()+70)*255),int(cos(0.001*millis()+190)*255),int(cos(0.001*millis())*255)));
+
+    ellipse(x,y,10,10);
+
+    for(int i=0;i<boules.length;i++){
+
+        boules[i].xa+=cos(boules[i].d)*boules[i].v*0.1;
+
+        boules[i].ya+=sin(boules[i].d)*boules[i].v*0.1;
+
+        boules[i].draw();
+
+        boules[i].colision(i);
+
+    }
+
+};
+
+var generate = function(){
+
+    boules=[];
+
+    for(var i=0; i<=150;i++){
+
+        boules.push(new Boule(round(width/2),round(height/2),round(random(359)),round(random(1)),round(random(15,30))));
+
+    }
+
+};
+
+class Boule{
+
+    int xa, ya, d, b, v;
+
+    Boule(int xa,int ya,int d,int b,int v){
+
+        this.xa=xa;
+
+        this.ya=ya;
+
+        this.v=v;
+
+        this.b=b;
+
+        this.d=d;
+
+    }
+
+    void colision(iii){
+
+        pp =sqrt(this.v*10)/2;
+
+        if((this.xa-pp) <0 || (this.xa+pp) > width){
+
+            this.d=180+this.d;
+
+        }else if((this.ya-pp) <0 || (this.ya+pp) > height){
+
+            this.d=0-this.d;
+
+        }else if(sqrt(pow(x-this.xa,2)+pow(y-this.ya,2))<(pp+5)){
+
+            if(b == 0){
+
+                point++;
+
+            }else{
+
+                vie--;
+
+                if(vie == 0){
+
+                    fill(0,0,200);
+
+                    textSize(70);
+
+                    text("Score:"+point,width/2,height/2);
+
+                    exit();
+
+                }      
+
+            }
+
+            boules[iii]=new Boule(round(random(100,width-100)),round(random(100,height-100)),round(random(359)),round(random(1)),round(random(10,20+point*5)));
+
+        }
+
+    }
+
+    void draw(){
+
+        if(this.b == 0){
+
+            fill(0,200,0);
+
+        }else{
+
+            fill(200,0,0);
+
+        }
+
+        ellipse(this.xa,this.ya,sqrt(this.v*10),sqrt(this.v*10));
+
+    }
+
+}
+
+</script>
+
+</body>
+
 </html>
